@@ -21,7 +21,7 @@ def create_db():
         con = sqlite3.connect('db.sqlite')
         cur = con.cursor()
     except sqlite3.Error as e:
-        print("Ошибка при работе с sqlite:", e)
+        print("Ошибка при работе с sqlite: ", e)
     finally:
         con.close()
 

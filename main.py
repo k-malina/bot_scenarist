@@ -23,7 +23,7 @@ import datetime
 from ya_gpt import (
     count_tokens_in_dialogue,
     make_promt,
-    new_token,
+    create_new_token,
     ask_gpt
 )
 import telebot
