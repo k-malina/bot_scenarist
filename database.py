@@ -82,17 +82,12 @@ def execute_selection_query(sql_query, data=None, database_path = f'{DB_dir}/{DB
     except Exception as e:
         logging.error(f"DB error: {e}")
 
-def select_data(u_id, session_id, promt_type):
-    con = sqlite3.connect('db.sqlite')
-    cur = con.cursor()
-    cur.execute(f'''
-    SELECT content 
-    FROM prompts WHERE user_id = {u_id} 
-    AND session_id = {session_id} 
-    AND role = {promt_type}
-    LIMIT 1;''')
-    con.commit()
-    con.close()
+def get_value_from_table(column_name, user_id):
+    sql_query = f'''
+    SELECT {column_name} 
+    FROM {DB_name}
+    WHERE user_id = {user_id}'''
+
 
 #проверка БД -- выводит всю таблицу
 def get_all_rows():
@@ -250,4 +245,7 @@ def clean_tbl(tbl_name):
     execute_query(sql_query)
 
 def get_user_amount():
-
+    sql_query = '''SELECT COUNT(user_id) 
+                    FROM Promts;'''
+    number_of_users = execute_selection_query(sql_query)
+    return number_of_users
